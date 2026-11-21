@@ -11,7 +11,20 @@
     'Información falsa',
     'Otro motivo'
   ];
-  var blockedSet = new Set();
+  var blockedSet = new Set();// Aviso propio, arriba de la pantalla
+  function showToast(msg) {
+    var t = document.getElementById('gmod-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'gmod-toast';
+      t.style.cssText = 'position:fixed;left:50%;top:16px;transform:translateX(-50%);background:var(--surface-2);color:var(--paper);border:1px solid var(--dawn);padding:12px 20px;border-radius:20px;font-size:0.88rem;z-index:300;max-width:90%;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.4);';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.style.display = 'block';
+    clearTimeout(t._h);
+    t._h = setTimeout(function () { t.style.display = 'none'; }, 3000);
+  }
 
   function esc(s) {
     return String(s == null ? '' : s)
